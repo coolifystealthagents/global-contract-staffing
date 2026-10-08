@@ -1,0 +1,4 @@
+import type { Metadata } from 'next';
+import { site } from '@/lib/site';
+export const metadata:Metadata={title:'Privacy policy'};
+export default function PrivacyPage(){return <main><header className="page-hero"><p className="eyebrow">Privacy</p><h1>Privacy policy</h1><p>Last updated October 8, 2026</p></header><section className="content-wrap"><div className="prose"><h2>Information we collect</h2><p>We collect the information you submit through our contact form, including your name, email address, referral source, and message. We also collect basic site usage and performance events.</p><h2>How we use information</h2><p>We use submitted information to respond to your request, coordinate a consultation, improve the site, and protect the service from abuse.</p><h2>Contact</h2><p>Questions can be sent to hello@{site.domain}.</p></div></section></main>}

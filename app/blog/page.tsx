@@ -1,0 +1,5 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { blogPosts } from '@/lib/content';
+export const metadata:Metadata={title:'Blog',description:'Practical guides for designing, delegating, and reviewing specialist remote support.'};
+export default function BlogPage(){return <main><header className="page-hero"><p className="eyebrow">Practical field notes</p><h1>Clearer roles. Better handoffs.</h1><p>Guides for owners and managers who want to delegate recurring work without losing visibility or control.</p></header><section className="content-wrap"><div className="principles">{['All',...new Set(blogPosts.map((p)=>p.category))].map((category)=><span className="pill" key={category}>{category} ({category==='All'?blogPosts.length:blogPosts.filter((p)=>p.category===category).length})</span>)}</div><div className="article-grid">{blogPosts.map((post)=><Link className="article-card" href={`/blog/${post.slug}`} key={post.slug}><span className="pill">{post.category}</span><h2>{post.title}</h2><p>{post.description}</p><span className="text-link">Read article</span></Link>)}</div></section></main>}

@@ -1,0 +1,8 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { site } from '@/lib/site';
+import { serviceBySlug } from '@/lib/content';
+export function generateStaticParams(){return site.services.map(({slug})=>({slug}))}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const service=serviceBySlug(slug);return service?{title:service.name,description:service.short}:{} }
+export default async function ServicePage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const service=serviceBySlug(slug);if(!service)notFound();return <main><header className="page-hero"><p className="eyebrow">Specialist role</p><h1>{service.name}</h1><p>{service.short}</p><Link id={`cta-services-${service.slug}-bookcall`} className="button primary" href="/contact-us">Discuss this role in a free call</Link></header><section className="content-wrap"><div className="prose"><h2>Where this role adds capacity</h2><p>A strong handoff gives this role a clear queue, an agreed output, and an escalation path. Your team keeps the judgment calls. The assistant keeps the preparation and coordination moving.</p><h2>Work this assistant can support</h2><ul>{service.tasks.map((task)=><li key={task}>{task}</li>)}</ul><h2>Start with a controlled workflow</h2><p>Choose one repeatable process. Document the source material, completion standard, and review owner. Expand only after the first workflow is stable.</p><Link id={`cta-services-${service.slug}-consultation`} className="button primary" href="/contact-us">Plan a free consultation</Link></div></section></main>}
