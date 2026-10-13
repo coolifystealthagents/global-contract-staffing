@@ -1,0 +1,24 @@
+{
+  "site":"GlobalContractStaffing","canonicalDomain":"https://globalcontractstaffing.com","repository":"coolifystealthagents/global-contract-staffing","branch":"main","date":"2026-10-12",
+  "blog":[
+    {"slug":"global-contractor-onboarding-evidence","title":"Global Contractor Onboarding Evidence","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/global-contractor-onboarding-evidence.png"},
+    {"slug":"cross-border-role-boundary-charter","title":"Cross-Border Role Boundary Charter","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/cross-border-role-boundary-charter.png"},
+    {"slug":"time-zone-coverage-handoff","title":"Time-Zone Coverage Handoff","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/time-zone-coverage-handoff.png"},
+    {"slug":"contractor-access-expiration-review","title":"Contractor Access Expiration Review","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/contractor-access-expiration-review.png"},
+    {"slug":"distributed-queue-ownership-map","title":"Distributed Queue Ownership Map","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/distributed-queue-ownership-map.png"},
+    {"slug":"global-deliverable-acceptance-checklist","title":"Global Deliverable Acceptance Checklist","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/global-deliverable-acceptance-checklist.png"},
+    {"slug":"contract-team-incident-escalation","title":"Contract Team Incident Escalation","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/contract-team-incident-escalation.png"},
+    {"slug":"vendor-of-record-reconciliation","title":"Vendor-of-Record Reconciliation","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/vendor-of-record-reconciliation.png"},
+    {"slug":"multicurrency-invoice-evidence-pack","title":"Multicurrency Invoice Evidence Pack","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/multicurrency-invoice-evidence-pack.png"},
+    {"slug":"contractor-offboarding-closure","title":"Contractor Offboarding Closure","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/contractor-offboarding-closure.png"},
+    {"slug":"async-decision-record-protocol","title":"Async Decision Record Protocol","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/async-decision-record-protocol.png"},
+    {"slug":"regional-holiday-coverage-plan","title":"Regional Holiday Coverage Plan","sourcePath":"lib/october12Blog.ts","thumbnailPath":"public/images/october-12/regional-holiday-coverage-plan.png"}
+  ],
+  "research":[
+    {"slug":"contract-handoff-latency-study","title":"Contract Handoff Latency Study","sourcePath":"lib/october12Research.ts","thumbnailPath":"public/images/october-12/contract-handoff-latency-study.png","sources":10},
+    {"slug":"access-removal-completion-audit","title":"Access Removal Completion Audit","sourcePath":"lib/october12Research.ts","thumbnailPath":"public/images/october-12/access-removal-completion-audit.png","sources":10},
+    {"slug":"distributed-queue-rework-analysis","title":"Distributed Queue Rework Analysis","sourcePath":"lib/october12Research.ts","thumbnailPath":"public/images/october-12/distributed-queue-rework-analysis.png","sources":10},
+    {"slug":"deliverable-acceptance-reliability","title":"Deliverable Acceptance Reliability","sourcePath":"lib/october12Research.ts","thumbnailPath":"public/images/october-12/deliverable-acceptance-reliability.png","sources":10},
+    {"slug":"cross-border-coverage-continuity-method","title":"Cross-Border Coverage Continuity Method","sourcePath":"lib/october12Research.ts","thumbnailPath":"public/images/october-12/cross-border-coverage-continuity-method.png","sources":10}
+  ]
+}
