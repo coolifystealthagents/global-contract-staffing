@@ -1,1 +1,45 @@
-import{NextResponse}from'next/server';const personalDomains=new Set(['gmail.com','yahoo.com','hotmail.com','outlook.com','icloud.com','aol.com','proton.me','protonmail.com']);export async function POST(request:Request){const form=await request.formData();if(form.get('website_url'))return NextResponse.json({ok:true});const source=String(form.get('source')||'');const full=source.startsWith('contact-page');const firstName=String(form.get('first_name')||'').trim();const lastName=String(form.get('last_name')||'').trim();const legacyName=String(form.get('name')||'').trim();const email=String(form.get('email')||'').trim().toLowerCase();const company=String(form.get('company')||'').trim();const companySize=String(form.get('company_size')||'').trim();const positions=String(form.get('positions_to_fill')||'').trim();const referral=String(form.get('referral_source')||'').trim();if(!/^\S+@\S+\.\S+$/.test(email)||(full?(!firstName||!lastName||!company||!companySize||!positions||!referral):!legacyName))return NextResponse.json({ok:false,message:'Please complete every required field.'},{status:400});if(full&&personalDomains.has(email.split('@')[1]))return NextResponse.json({ok:false,message:'Please use your business email address.'},{status:400});const endpoint=process.env.ACR_LEAD_ENDPOINT;if(endpoint){const payload=Object.fromEntries(form.entries());delete payload.website_url;const forwarded=await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!forwarded.ok)return NextResponse.json({ok:false,message:'We could not send your request.'},{status:502})}return NextResponse.json({ok:true})}
+import { NextResponse } from 'next/server';
+import { sendLeadFallbackToMattermost } from '../../../lib/lead-fallback-mattermost';
+
+const personalDomains = new Set(['gmail.com','yahoo.com','hotmail.com','outlook.com','icloud.com','aol.com','proton.me','protonmail.com']);
+
+export async function POST(request: Request) {
+  const form = await request.formData();
+  if (form.get('website_url')) return NextResponse.json({ ok: true });
+  const source = String(form.get('source') || '');
+  const full = source.startsWith('contact-page');
+  const firstName = String(form.get('first_name') || '').trim();
+  const lastName = String(form.get('last_name') || '').trim();
+  const legacyName = String(form.get('name') || '').trim();
+  const email = String(form.get('email') || '').trim().toLowerCase();
+  const company = String(form.get('company') || '').trim();
+  const companySize = String(form.get('company_size') || '').trim();
+  const positions = String(form.get('positions_to_fill') || '').trim();
+  const referral = String(form.get('referral_source') || '').trim();
+  if (!/^\S+@\S+\.\S+$/.test(email) || (full ? (!firstName || !lastName || !company || !companySize || !positions || !referral) : !legacyName)) {
+    return NextResponse.json({ ok: false, message: 'Please complete every required field.' }, { status: 400 });
+  }
+  if (full && personalDomains.has(email.split('@')[1])) {
+    return NextResponse.json({ ok: false, message: 'Please use your business email address.' }, { status: 400 });
+  }
+  const endpoint = process.env.ACR_LEAD_ENDPOINT;
+  if (endpoint) {
+    const payload = Object.fromEntries(form.entries());
+    delete payload.website_url;
+    const forwarded = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+    if (!forwarded.ok) return NextResponse.json({ ok: false, message: 'We could not send your request.' }, { status: 502 });
+  }
+  void sendLeadFallbackToMattermost({
+    name: [firstName, lastName].filter(Boolean).join(' ') || legacyName,
+    email,
+    phone: String(form.get('phone') || ''),
+    business: company,
+    message: String(form.get('message') || ''),
+    companySize,
+    positions,
+    referral,
+    pageUrl: String(form.get('_page_url') || request.headers.get('referer') || ''),
+    userAgent: request.headers.get('user-agent') || '',
+  });
+  return NextResponse.json({ ok: true });
+}
