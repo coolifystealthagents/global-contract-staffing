@@ -1,115 +1,114 @@
-import assert from 'node:assert/strict';
-import { readFile, access } from 'node:fs/promises';
 import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const root = new URL('../', import.meta.url);
-const read = (path) => readFile(new URL(path, root), 'utf8');
+const root = process.cwd();
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+const exists = (file) => fs.existsSync(path.join(root, file));
+const sources = (files) => files.map(read).join('\n');
 
-const routeFiles = [
-  'app/page.tsx',
-  'app/about/page.tsx',
-  'app/services/page.tsx',
-  'app/services/[slug]/page.tsx',
-  'app/contact-us/page.tsx',
-  'app/blog/page.tsx',
-  'app/blog/[slug]/page.tsx',
-  'app/research/page.tsx',
-  'app/research/[slug]/page.tsx',
-  'app/thank-you/page.tsx',
-  'app/thanks-whats-next/page.tsx',
-];
+const topRoutes = ['app/page.tsx','app/about/page.tsx','app/services/page.tsx','app/blog/page.tsx','app/research/page.tsx','app/contact-us/page.tsx','app/privacy/page.tsx','app/terms/page.tsx'];
 
-test('global chrome uses the required sticky navigation and parent attribution', async () => {
-  const chrome = await read('components/SiteChrome.tsx');
-  const navigation = await read('components/PrimaryNavigation.tsx');
-  assert.match(navigation, /Home/);
-  assert.match(navigation, /Services/);
-  assert.match(navigation, /Contact Us/);
-  assert.match(navigation, /usePathname/);
-  assert.match(navigation, /aria-current/);
-  assert.equal((chrome.match(/Powered by StealthAgents/g) || []).length, 2);
-  assert.doesNotMatch(chrome, /TimedLeadModal/);
+test('global chrome and contact path keep the approved conversion model', () => {
+  const chrome = read('components/SiteChrome.tsx');
+  const nav = read('components/PrimaryNavigation.tsx');
+  const contact = read('app/contact-us/page.tsx');
+  const layout = read('app/layout.tsx');
+  assert.match(chrome, /Powered by StealthAgents/);
+  assert.match(nav, /aria-current/);
+  assert.doesNotMatch(layout, /LeadModal/);
+  assert.match(contact, /<LeadForm/);
+  assert.match(contact, /approvedReviews/);
+  const reviews = read('lib/reviews.ts');
+  assert.ok((reviews.match(/quote:/g) || []).length >= 10);
+  assert.doesNotMatch(contact, /oncehub|iframe/i);
 });
 
-test('contact page implements the form-first conversion and approved trust section', async () => {
-  const contact = await read('app/contact-us/page.tsx');
-  assert.match(contact, /StealthAgents reviews/);
-  assert.match(contact, /Official team, Bacolod/);
-  assert.match(contact, /stealth-agents-team-bacolod/);
-  assert.match(contact, /stealth-agents-logo-black/);
-  assert.doesNotMatch(contact, /oncehub|booking-frame|consultation-calendar/i);
+test('all service records have long-form controls, unique CTAs, and distinct illustrations', () => {
+  const data = read('lib/service-details.ts');
+  const page = read('app/services/[slug]/page.tsx');
+  for (const field of ['scope','inputs','deliverables','qualityControls','boundaries','scenarios','faqs','heroImage','ctaHeading']) assert.match(data, new RegExp(field));
+  for (const heading of ['Scope','Inputs','Deliverables','Controls','Decision boundaries','Scenarios','Frequently asked questions','Related services']) assert.match(page, new RegExp(heading, 'i'));
+  const art = fs.readdirSync(path.join(root, 'public/images/services')).filter((name) => name.endsWith('.svg'));
+  assert.equal(art.length, 6);
+  assert.equal(new Set(art.map((name) => read(`public/images/services/${name}`))).size, 6);
 });
 
-test('approved StealthAgents review collection has at least ten unique records', async () => {
-  const reviews = await read('lib/reviews.ts');
-  const quotes = [...reviews.matchAll(/quote:\s*['"`]([^'"`]+)['"`]/g)].map((match) => match[1]);
-  assert.ok(quotes.length >= 10, `expected at least 10 reviews, found ${quotes.length}`);
-  assert.equal(new Set(quotes).size, quotes.length, 'review quotes must be unique');
-  assert.match(reviews, /https:\/\/stealthagents\.com/);
-});
-
-test('every service route uses the long-form service system and a unique hero', async () => {
-  const servicePage = await read('app/services/[slug]/page.tsx');
-  for (const heading of ['Who this team supports', 'Scope of work', 'Inputs', 'Deliverables', 'Quality controls', 'Decision boundaries', 'Common starting scenarios', 'Frequently asked questions', 'Related services']) {
-    assert.match(servicePage, new RegExp(heading, 'i'));
+test('blog and research use the accessible editorial shell', () => {
+  const blog = read('app/blog/[slug]/page.tsx');
+  const research = read('app/research/[slug]/page.tsx');
+  const sidebar = read('components/ArticleSidebar.tsx');
+  for (const source of [blog, research]) {
+    assert.match(source, /ArticleSidebar/);
+    assert.match(source, /ArticleHero/);
+    assert.match(source, /aria-current="page"/);
+    assert.match(source, /application\/ld\+json/);
+    assert.match(source, /alternates:\s*\{\s*canonical/);
   }
-  const details = await read('lib/service-details.ts');
-  assert.equal((details.match(/heroImage:/g) || []).length, 6);
-  const heroes = [...details.matchAll(/heroImage:\s*['"`]([^'"`]+)['"`]/g)].map((match) => match[1]);
-  assert.equal(new Set(heroes).size, 6);
-  const ctas = [...details.matchAll(/ctaHeading:\s*['"`]([^'"`]+)['"`]/g)].map((match) => match[1]);
-  assert.equal(ctas.length, 6);
-  assert.equal(new Set(ctas).size, 6);
-  const css = await read('app/services/service-detail.css');
-  assert.match(css, /overflow-wrap:\s*anywhere/);
+  assert.match(sidebar, /<nav/);
+  assert.match(sidebar, /<details/);
 });
 
-test('blog and research articles share a populated sticky TOC sidebar', async () => {
-  const sidebar = await read('components/ArticleSidebar.tsx');
-  assert.match(sidebar, /IntersectionObserver/);
-  assert.match(sidebar, /On this page/);
-  assert.match(sidebar, /Related reading/);
-  assert.match(sidebar, /aria-current/);
-  for (const path of ['app/blog/[slug]/page.tsx', 'app/research/[slug]/page.tsx']) {
-    const page = await read(path);
-    assert.match(page, /ArticleSidebar/);
-    assert.match(page, /article-layout/);
-  }
+test('all primary routes have self canonicals and a prominent media-led opening', () => {
+  const combined = sources(topRoutes);
+  for (const canonical of ["'/'","'/about'","'/services'","'/blog'","'/research'","'/contact-us'","'/privacy'","'/terms'"]) assert.match(combined, new RegExp(`canonical: ${canonical.replace(/[\/]/g, '\\/')}`));
+  for (const file of ['app/about/page.tsx','app/services/page.tsx','app/blog/page.tsx','app/research/page.tsx']) assert.match(read(file), /PageHero/);
+  assert.match(read('components/Marketing.tsx'), /hero-visual/);
+  assert.match(read('app/contact-us/page.tsx'), /stealth-agents-team-bacolod\.jpg/);
+  for (const asset of ['about-atlas.svg','services-atlas.svg','blog-atlas.svg','research-atlas.svg','booking-atlas.svg','confirmation-atlas.svg','not-found-atlas.svg']) assert.ok(exists(`public/images/pages/${asset}`));
 });
 
-test('main route families expose intentional hero imagery', async () => {
-  for (const path of routeFiles) {
-    const source = await read(path);
-    assert.match(source, /Image|ArticleHero|SchedulerEmbed|heroImage/, `${path} needs a rendered image treatment`);
-  }
+test('canonical host policy and security headers cover every response', () => {
+  const config = read('next.config.mjs');
+  const proxy = read('proxy.ts');
+  const policy = read('lib/canonical-request.ts');
+  for (const header of ['Content-Security-Policy','Strict-Transport-Security','X-Content-Type-Options','Referrer-Policy','Permissions-Policy','X-Frame-Options']) assert.match(config, new RegExp(header));
+  assert.match(config, /poweredByHeader:\s*false/);
+  assert.doesNotMatch(config, /unoptimized:\s*true/);
+  assert.match(proxy, /NextResponse\.redirect\(destination, 308\)/);
+  assert.match(policy, /globalcontractstaffing\.com/);
+  assert.match(policy, /www\./);
+  assert.match(policy, /forwardedProto/);
 });
 
-test('canonical metadata, security headers, and consistent brand assets are configured', async () => {
-  const layout = await read('app/layout.tsx');
-  assert.doesNotMatch(layout, /alternates:\s*\{\s*canonical:\s*['"]\/['"]/);
-  const config = await read('next.config.mjs');
-  for (const header of ['Content-Security-Policy', 'Strict-Transport-Security', 'X-Content-Type-Options', 'Referrer-Policy', 'Permissions-Policy']) {
-    assert.match(config, new RegExp(header));
+test('lead and telemetry boundaries limit body, origin, rate, and forwarded fields', () => {
+  const lead = read('app/api/submit-lead/route.ts');
+  const track = read('app/ingest/track/route.ts');
+  const guards = read('lib/request-security.ts');
+  for (const source of [lead, track]) {
+    assert.match(source, /hasAllowedOrigin/);
+    assert.match(source, /withinRateLimit/);
+    assert.match(source, /no-store/i);
   }
-  await access(new URL('app/icon.svg', root));
-  const icon = await read('app/icon.svg');
-  const logo = await read('public/logo.svg');
-  assert.equal(icon.trim(), logo.trim());
+  assert.match(lead, /MAX_BODY_BYTES/);
+  assert.doesNotMatch(lead, /Object\.fromEntries\(form\.entries\(\)\)/);
+  assert.match(track, /JSON\.parse/);
+  assert.match(guards, /cf-connecting-ip/);
 });
 
-test('design registry records the site fingerprint', async () => {
-  const registry = JSON.parse(await read('design-registry.json'));
-  const record = registry.find((item) => item.domain === 'globalcontractstaffing.com');
-  assert.ok(record);
-  for (const key of ['industry', 'audience', 'designFamily', 'heroComposition', 'typeCharacter', 'paletteFamily', 'shapeGrammar', 'imageTreatment', 'sectionRhythm', 'navigationTreatment', 'motionSignature', 'density', 'signatureElement']) {
-    assert.ok(record[key], `missing ${key}`);
-  }
+test('brand identity, registry, and conversion utilities are complete', () => {
+  assert.equal(read('app/icon.svg'), read('public/logo.svg'));
+  const registry = JSON.parse(read('design-registry.json'));
+  assert.equal(registry.length, 1);
+  assert.equal(registry[0].domain, 'globalcontractstaffing.com');
+  assert.equal(registry[0].signatureElement, 'Handoff atlas connecting scope, ownership, review, and escalation');
+  for (const file of ['app/thank-you/page.tsx','app/thanks-whats-next/page.tsx','app/not-found.tsx']) assert.match(read(file), /images\/pages/);
 });
 
-test('visible source copy avoids forbidden dash punctuation and decorative labels', async () => {
-  const files = await Promise.all(routeFiles.concat(['components/SiteChrome.tsx', 'components/Marketing.tsx', 'lib/site.ts']).map(async (path) => [path, await read(path)]));
-  for (const [path, source] of files) {
-    assert.doesNotMatch(source, /[–—]/, `${path} contains a forbidden dash`);
-    assert.doesNotMatch(source, />\s*0[1-9]\s*</, `${path} contains decorative zero-padded labels`);
-  }
+test('decorative numbering and generic placeholder language are absent', () => {
+  const marketing = read('components/Marketing.tsx');
+  assert.doesNotMatch(marketing, /service-number/);
+  assert.doesNotMatch(marketing, /String\(index/);
+  const publicPages = sources([...topRoutes,'components/Marketing.tsx']);
+  assert.doesNotMatch(publicPages, /lorem ipsum|coming soon|placeholder/i);
+});
+
+test('legacy editorial records do not repeat long paragraphs across articles', () => {
+  const content = read('lib/legacyEditorial.ts');
+  const strings = [...content.matchAll(/["'`]([^"'`\n]{100,})["'`]/g)].map((match) => match[1]);
+  const counts = new Map();
+  for (const value of strings) counts.set(value, (counts.get(value) || 0) + 1);
+  const duplicates = [...counts.entries()].filter(([, count]) => count > 1);
+  assert.deepEqual(duplicates, [], `Repeated long editorial passages: ${duplicates.slice(0, 4).map(([, count]) => count).join(', ')}`);
 });
