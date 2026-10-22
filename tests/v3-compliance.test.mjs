@@ -57,6 +57,11 @@ test('every service route uses the long-form service system and a unique hero', 
   assert.equal((details.match(/heroImage:/g) || []).length, 6);
   const heroes = [...details.matchAll(/heroImage:\s*['"`]([^'"`]+)['"`]/g)].map((match) => match[1]);
   assert.equal(new Set(heroes).size, 6);
+  const ctas = [...details.matchAll(/ctaHeading:\s*['"`]([^'"`]+)['"`]/g)].map((match) => match[1]);
+  assert.equal(ctas.length, 6);
+  assert.equal(new Set(ctas).size, 6);
+  const css = await read('app/services/service-detail.css');
+  assert.match(css, /overflow-wrap:\s*anywhere/);
 });
 
 test('blog and research articles share a populated sticky TOC sidebar', async () => {
