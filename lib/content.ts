@@ -2,8 +2,11 @@ import { site } from './site';
 import type { BlogPost, ResearchPost } from './types';
 import { october12BlogPosts } from './october12Blog';
 import { october12ResearchPosts } from './october12Research';
+import { october22BlogPosts } from './october22-blog';
+import { october22ResearchPosts } from './october22-research';
 
 export const blogPosts: BlogPost[] = [
+  ...october22BlogPosts,
   ...october12BlogPosts,
   {
     "slug": "fractional-coo-vs-global-contract-team",
@@ -472,6 +475,7 @@ export const blogPosts: BlogPost[] = [
   }
 ];
 export const researchPosts: ResearchPost[] = [
+  ...october22ResearchPosts,
   ...october12ResearchPosts,
   {
     "slug": "operations-contract-team-workflow-boundary-review-1",
