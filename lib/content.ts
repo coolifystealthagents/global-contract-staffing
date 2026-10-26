@@ -15,8 +15,8 @@ function uniqueBySlug<T extends { slug: string }>(posts: T[]): T[] {
   });
 }
 
-export const blogPosts: BlogPost[] = uniqueBySlug([...october22BlogPosts, ...october12BlogPosts, ...legacyBlogPosts]);
-export const researchPosts: ResearchPost[] = uniqueBySlug([...october22ResearchPosts, ...october12ResearchPosts, ...legacyResearchPosts]);
+export const blogPosts: BlogPost[] = uniqueBySlug([...october22BlogPosts, ...october12BlogPosts, ...legacyBlogPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
+export const researchPosts: ResearchPost[] = uniqueBySlug([...october22ResearchPosts, ...october12ResearchPosts, ...legacyResearchPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
 
 export const nav = [
   { href: '/services', label: 'Services' },
