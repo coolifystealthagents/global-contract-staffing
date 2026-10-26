@@ -12,6 +12,7 @@ const securityHeaders = [
 const nextConfig = {
   output: 'standalone',
   poweredByHeader: false,
+  skipProxyUrlNormalize: true,
   images: { formats: ['image/avif', 'image/webp'] },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }];

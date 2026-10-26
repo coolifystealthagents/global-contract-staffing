@@ -20,6 +20,7 @@ test('global chrome and contact path keep the approved conversion model', () => 
   assert.doesNotMatch(layout, /LeadModal/);
   assert.match(contact, /<LeadForm/);
   assert.match(contact, /approvedReviews/);
+  assert.match(contact, /className="review-marquee"[\s\S]*tabIndex=\{0\}/);
   const reviews = read('lib/reviews.ts');
   assert.ok((reviews.match(/quote:/g) || []).length >= 10);
   assert.doesNotMatch(contact, /oncehub|iframe/i);
@@ -65,6 +66,7 @@ test('canonical host policy and security headers cover every response', () => {
   const policy = read('lib/canonical-request.ts');
   for (const header of ['Content-Security-Policy','Strict-Transport-Security','X-Content-Type-Options','Referrer-Policy','Permissions-Policy','X-Frame-Options']) assert.match(config, new RegExp(header));
   assert.match(config, /poweredByHeader:\s*false/);
+  assert.match(config, /skipProxyUrlNormalize:\s*true/);
   assert.doesNotMatch(config, /unoptimized:\s*true/);
   assert.match(proxy, /NextResponse\.redirect\(destination, 308\)/);
   assert.match(policy, /globalcontractstaffing\.com/);

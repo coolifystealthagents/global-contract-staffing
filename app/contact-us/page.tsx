@@ -68,7 +68,11 @@ export default function ContactPage() {
             <a href={STEALTH_AGENTS_REVIEW_SOURCE_URL} rel="noopener noreferrer">StealthAgents reviews</a>
             <span>Verified first party feedback</span>
           </div>
-          <div className="review-marquee" aria-label="Stealth Agents customer reviews">
+          <div
+            className="review-marquee"
+            aria-label="Stealth Agents customer reviews. Scroll horizontally to read more reviews."
+            tabIndex={0}
+          >
             <div className="review-track">
               <div className="review-set">
                 {approvedReviews.map((review) => <ReviewCard key={review.name} review={review} />)}
