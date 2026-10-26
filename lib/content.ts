@@ -2,10 +2,21 @@ import { site } from './site';
 import type { BlogPost, ResearchPost } from './types';
 import { october12BlogPosts } from './october12Blog';
 import { october12ResearchPosts } from './october12Research';
+import { october22BlogPosts } from './october22-blog';
+import { october22ResearchPosts } from './october22-research';
 import { legacyBlogPosts, legacyResearchPosts } from './legacyEditorial';
 
-export const blogPosts: BlogPost[] = [...october12BlogPosts, ...legacyBlogPosts];
-export const researchPosts: ResearchPost[] = [...october12ResearchPosts, ...legacyResearchPosts];
+function uniqueBySlug<T extends { slug: string }>(posts: T[]): T[] {
+  const seen = new Set<string>();
+  return posts.filter((post) => {
+    if (seen.has(post.slug)) return false;
+    seen.add(post.slug);
+    return true;
+  });
+}
+
+export const blogPosts: BlogPost[] = uniqueBySlug([...october22BlogPosts, ...october12BlogPosts, ...legacyBlogPosts]);
+export const researchPosts: ResearchPost[] = uniqueBySlug([...october22ResearchPosts, ...october12ResearchPosts, ...legacyResearchPosts]);
 
 export const nav = [
   { href: '/services', label: 'Services' },

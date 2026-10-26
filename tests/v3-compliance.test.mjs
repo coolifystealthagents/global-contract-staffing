@@ -117,6 +117,14 @@ test('atlas hero emphasis and responsive grids retain accessible styles', () => 
   assert.match(css, /@media\(max-width:700px\)[^\n]*\.article-grid,.content-grid\{grid-template-columns:minmax\(0,1fr\)\}/);
 });
 
+test('merged editorial collections keep the newest record for each route slug', () => {
+  const content = read('lib/content.ts');
+  assert.match(content, /function uniqueBySlug/);
+  assert.match(content, /uniqueBySlug\(\[\.\.\.october22BlogPosts, \.\.\.october12BlogPosts, \.\.\.legacyBlogPosts\]\)/);
+  assert.match(content, /uniqueBySlug\(\[\.\.\.october22ResearchPosts, \.\.\.october12ResearchPosts, \.\.\.legacyResearchPosts\]\)/);
+  assert.doesNotMatch(read('lib/october22-blog.ts'), /\/services\/finance-administration-contract-team/);
+});
+
 test('legacy editorial records do not repeat long paragraphs across articles', () => {
   const content = read('lib/legacyEditorial.ts');
   const strings = [...content.matchAll(/["'`]([^"'`\n]{100,})["'`]/g)].map((match) => match[1]);
