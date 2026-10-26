@@ -104,6 +104,19 @@ test('decorative numbering and generic placeholder language are absent', () => {
   assert.doesNotMatch(publicPages, /lorem ipsum|coming soon|placeholder/i);
 });
 
+test('atlas hero emphasis and responsive grids retain accessible styles', () => {
+  const css = read('app/globals.css');
+  assert.match(css, /\.design-atlas \.hero-copy em\{color:#90c8ff\}/);
+  assert.match(css, /\.article-grid\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/);
+  assert.match(css, /\.content-grid\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/);
+  assert.match(css, /\.article-card,.content-card\{min-width:0\}/);
+  assert.match(css, /\.article-card h2,.content-card h2\{overflow-wrap:anywhere\}/);
+  assert.match(css, /\.research-method\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)\}/);
+  assert.match(css, /\.research-method article\{min-width:0\}/);
+  assert.match(css, /@media\(max-width:900px\)\{\.article-grid,.content-grid\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)\}\}/);
+  assert.match(css, /@media\(max-width:700px\)[^\n]*\.article-grid,.content-grid\{grid-template-columns:minmax\(0,1fr\)\}/);
+});
+
 test('legacy editorial records do not repeat long paragraphs across articles', () => {
   const content = read('lib/legacyEditorial.ts');
   const strings = [...content.matchAll(/["'`]([^"'`\n]{100,})["'`]/g)].map((match) => match[1]);
