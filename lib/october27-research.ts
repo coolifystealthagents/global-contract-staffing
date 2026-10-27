@@ -51,7 +51,8 @@ export const october27ResearchPosts: ResearchPost[] = [
         "label": "NIST Privacy Framework",
         "url": "https://www.nist.gov/privacy-framework"
       }
-    ]
+    ],
+    "thumbnail": "/images/october-27/globalcontractstaffing-milestone-evidence-study-3.svg"
   },
   {
     "slug": "globalcontractstaffing-approval-latency-brief-3",
@@ -103,7 +104,8 @@ export const october27ResearchPosts: ResearchPost[] = [
         "label": "ILO working time and work organization",
         "url": "https://www.ilo.org/topics/working-time"
       }
-    ]
+    ],
+    "thumbnail": "/images/october-27/globalcontractstaffing-approval-latency-brief-3.svg"
   },
   {
     "slug": "globalcontractstaffing-rate-change-lag-study-3",
@@ -155,7 +157,8 @@ export const october27ResearchPosts: ResearchPost[] = [
         "label": "European Central Bank euro reference rates",
         "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
       }
-    ]
+    ],
+    "thumbnail": "/images/october-27/globalcontractstaffing-rate-change-lag-study-3.svg"
   },
   {
     "slug": "globalcontractstaffing-asset-recovery-protocol-3",
@@ -207,7 +210,8 @@ export const october27ResearchPosts: ResearchPost[] = [
         "label": "ISO 31000 risk management",
         "url": "https://www.iso.org/standard/65694.html"
       }
-    ]
+    ],
+    "thumbnail": "/images/october-27/globalcontractstaffing-asset-recovery-protocol-3.svg"
   },
   {
     "slug": "globalcontractstaffing-holiday-coverage-gap-3",
@@ -259,6 +263,7 @@ export const october27ResearchPosts: ResearchPost[] = [
         "label": "GAO Standards for Internal Control",
         "url": "https://www.gao.gov/products/gao-14-704g"
       }
-    ]
+    ],
+    "thumbnail": "/images/october-27/globalcontractstaffing-holiday-coverage-gap-3.svg"
   }
 ];

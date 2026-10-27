@@ -71,7 +71,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "GAO Standards for Internal Control",
       "url": "https://www.gao.gov/products/gao-14-704g"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-sow-milestone-acceptance-3.svg"
   },
   {
     "slug": "globalcontractstaffing-timesheet-currency-reconciliation-3",
@@ -143,7 +144,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "European Central Bank euro reference rates",
       "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-timesheet-currency-reconciliation-3.svg"
   },
   {
     "slug": "globalcontractstaffing-statutory-holiday-swap-buffer-3",
@@ -215,7 +217,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "ILO working time and work organization",
       "url": "https://www.ilo.org/topics/working-time"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-statutory-holiday-swap-buffer-3.svg"
   },
   {
     "slug": "globalcontractstaffing-contractor-rate-change-control-3",
@@ -287,7 +290,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "ILO non-standard forms of employment",
       "url": "https://www.ilo.org/topics/non-standard-forms-employment"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-contractor-rate-change-control-3.svg"
   },
   {
     "slug": "globalcontractstaffing-right-to-work-reverification-3",
@@ -359,7 +363,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "UK Government right to work checks",
       "url": "https://www.gov.uk/check-job-applicant-right-to-work"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-right-to-work-reverification-3.svg"
   },
   {
     "slug": "globalcontractstaffing-equipment-return-cross-border-3",
@@ -431,7 +436,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "NIST SP 800-88 media sanitization",
       "url": "https://csrc.nist.gov/pubs/sp/800/88/r1/final"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-equipment-return-cross-border-3.svg"
   },
   {
     "slug": "globalcontractstaffing-client-approval-latency-3",
@@ -503,7 +509,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "GAO Standards for Internal Control",
       "url": "https://www.gao.gov/products/gao-14-704g"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-client-approval-latency-3.svg"
   },
   {
     "slug": "globalcontractstaffing-contract-to-perm-handoff-3",
@@ -575,7 +582,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "ILO non-standard forms of employment",
       "url": "https://www.ilo.org/topics/non-standard-forms-employment"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-contract-to-perm-handoff-3.svg"
   },
   {
     "slug": "globalcontractstaffing-supplier-scorecard-3",
@@ -647,7 +655,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "ISO 30414 human capital reporting",
       "url": "https://www.iso.org/standard/69338.html"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-supplier-scorecard-3.svg"
   },
   {
     "slug": "globalcontractstaffing-insurance-certificate-tracker-3",
@@ -719,7 +728,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "ISO 31000 risk management",
       "url": "https://www.iso.org/standard/65694.html"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-insurance-certificate-tracker-3.svg"
   },
   {
     "slug": "globalcontractstaffing-rolloff-bench-planning-3",
@@ -791,7 +801,8 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "ILO non-standard forms of employment",
       "url": "https://www.ilo.org/topics/non-standard-forms-employment"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-rolloff-bench-planning-3.svg"
   },
   {
     "slug": "globalcontractstaffing-site-audit-logistics-3",
@@ -863,6 +874,7 @@ export const october27BlogPosts: BlogPost[] = [
     "source": {
       "label": "ISO 19011 auditing management systems",
       "url": "https://www.iso.org/standard/70017.html"
-    }
+    },
+    "thumbnail": "/images/october-27/globalcontractstaffing-site-audit-logistics-3.svg"
   }
 ];
