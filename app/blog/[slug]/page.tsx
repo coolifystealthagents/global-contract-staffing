@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <p className="article-dek">{post.description}</p>
           <p className="article-byline">{site.name} Editorial Team · Published {formatDate(post.publishedAt)} · {post.readTime}</p>
         </div>
-        <ArticleHero image={post.thumbnail} alt={`Operational atlas showing scope, handoff, review, and escalation for ${post.title}`} />
+        <ArticleHero image={post.thumbnail?.startsWith("/thumbnails/november-05/") ? post.thumbnail.replace("/thumbnails/november-05/", "/thumbnails/november-05/hero/hero-") : post.thumbnail} alt={`Operational atlas showing scope, handoff, review, and escalation for ${post.title}`} />
       </header>
 
       <div className="article-shell article-layout">

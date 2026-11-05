@@ -92,7 +92,7 @@ export default async function ResearchPostPage({ params }: { params: Promise<{ s
           <p className="article-dek">{post.summary}</p>
           <p className="article-byline">{site.name} Editorial Team · Published {formatDate(post.publishedAt)}</p>
         </div>
-        <ArticleHero image={post.thumbnail} alt={`Evidence atlas showing scope, handoff, review, and escalation for ${post.title}`} />
+        <ArticleHero image={post.thumbnail?.startsWith("/thumbnails/november-05/") ? post.thumbnail.replace("/thumbnails/november-05/", "/thumbnails/november-05/hero/hero-") : post.thumbnail} alt={`Evidence atlas showing scope, handoff, review, and escalation for ${post.title}`} />
       </header>
 
       <div className="article-shell article-layout">
