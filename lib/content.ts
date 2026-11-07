@@ -6,10 +6,12 @@ import { november05BlogPosts } from './november05-blog';
 import { november05ResearchPosts } from './november05-research';
 import { november03BlogPosts } from './november03-blog';
 import { november04BlogPosts } from './november04-blog';
+import { november07BlogPosts } from './november07-blog';
 import { november02BlogPosts } from './november02-blog';
 import { november01BlogPosts } from './november01-blog';
 import { november03ResearchPosts } from './november03-research';
 import { november04ResearchPosts } from './november04-research';
+import { november07ResearchPosts } from './november07-research';
 import { november02ResearchPosts } from './november02-research';
 import { november01ResearchPosts } from './november01-research';
 import { october12BlogPosts } from './october12Blog';
@@ -31,8 +33,8 @@ function uniqueBySlug<T extends { slug: string }>(posts: T[]): T[] {
   });
 }
 
-export const blogPosts: BlogPost[] = uniqueBySlug([...november06BlogPosts, ...november05BlogPosts, ...november02BlogPosts, ...november01BlogPosts, ...october28BlogPosts, ...october27BlogPosts, ...october22BlogPosts, ...october12BlogPosts, ...legacyBlogPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
-export const researchPosts: ResearchPost[] = uniqueBySlug([...november06ResearchPosts, ...november05ResearchPosts, ...november02ResearchPosts, ...november01ResearchPosts, ...october28ResearchPosts, ...october27ResearchPosts, ...october22ResearchPosts, ...october12ResearchPosts, ...legacyResearchPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
+export const blogPosts: BlogPost[] = uniqueBySlug([...november07BlogPosts, ...november06BlogPosts, ...november05BlogPosts, ...november02BlogPosts, ...november01BlogPosts, ...october28BlogPosts, ...october27BlogPosts, ...october22BlogPosts, ...october12BlogPosts, ...legacyBlogPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
+export const researchPosts: ResearchPost[] = uniqueBySlug([...november07ResearchPosts, ...november06ResearchPosts, ...november05ResearchPosts, ...november02ResearchPosts, ...november01ResearchPosts, ...october28ResearchPosts, ...october27ResearchPosts, ...october22ResearchPosts, ...october12ResearchPosts, ...legacyResearchPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
 
 export const nav = [
   { href: '/services', label: 'Services' },
