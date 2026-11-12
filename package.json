@@ -10,6 +10,8 @@
     "audit": "npm run typecheck && npm run build && python3 scripts/ban_dashes.py .next/server/app"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "gsap": "^3.15.1",
     "next": "16.4.3",
     "react": "19.2.8",
     "react-dom": "19.2.8"

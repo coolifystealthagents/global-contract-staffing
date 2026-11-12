@@ -1,9 +1,2 @@
-import type { Metadata } from 'next';
-import { HomePage } from '@/components/Marketing';
-
-export const metadata: Metadata = {
-  alternates: { canonical: '/' },
-  openGraph: { url: '/', images: [{ url: '/hero.png', alt: 'Global contract staffing handoff atlas' }] },
-};
-
-export default function Page() { return <HomePage />; }
+import {HomeExperience} from './refresh-experience';
+export default function Home(){return <><main id="main-content"><HomeExperience/></main></>}

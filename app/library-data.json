@@ -1,0 +1,55 @@
+{
+  "theme": "global",
+  "shortBrand": "Global Contract Staffing",
+  "ctaText": "Build remote contract capacity around the work your business needs to move. Connect operations, customer support, projects, and administration through clear roles and accountable management.",
+  "blog": {
+    "title": "Field notes for a connected team.",
+    "intro": "Practical guides for leaders designing remote roles, team handoffs, and accountable contract operations.",
+    "image": "/refresh-20261113/blog.webp",
+    "alt": "Experienced professionals collaborating in a business meeting.",
+    "caption": "One team. A clearer connection.",
+    "ribbon": "Remote capacity, connected to your business",
+    "search": "Search by topic or workflow",
+    "guideTitle": "Take the idea into your own operation.",
+    "guides": [
+      {
+        "title": "Start with your context",
+        "text": "Compare the workflow with your team\u2019s actual systems, responsibilities, and source records."
+      },
+      {
+        "title": "Keep the evidence close",
+        "text": "Follow the source links and check the scope and date before using a conclusion."
+      },
+      {
+        "title": "Define a useful next step",
+        "text": "Turn the idea into a clear input, an expected output, and a named reviewer."
+      }
+    ],
+    "cta": "Let\u2019s connect the next part of your team."
+  },
+  "research": {
+    "title": "A wider view. A clearer decision.",
+    "intro": "Source-led research with clear questions, visible evidence, and practical context for your next staffing conversation.",
+    "image": "/refresh-20261113/research.webp",
+    "alt": "Team reviewing a presentation in a modern office meeting room.",
+    "caption": "One team. A clearer connection.",
+    "ribbon": "Remote capacity, connected to your business",
+    "search": "Search by topic or workflow",
+    "guideTitle": "Take the idea into your own operation.",
+    "guides": [
+      {
+        "title": "Start with your context",
+        "text": "Compare the workflow with your team\u2019s actual systems, responsibilities, and source records."
+      },
+      {
+        "title": "Keep the evidence close",
+        "text": "Follow the source links and check the scope and date before using a conclusion."
+      },
+      {
+        "title": "Define a useful next step",
+        "text": "Turn the idea into a clear input, an expected output, and a named reviewer."
+      }
+    ],
+    "cta": "Let\u2019s connect the next part of your team."
+  }
+}

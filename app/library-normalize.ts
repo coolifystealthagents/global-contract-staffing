@@ -1,0 +1,11 @@
+const blogDetails={};
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import thumbnails from './library-thumbnails.json';
+import data from './library-data.json';
+import type { LibraryPost } from './library';
+export function normalizePosts(items: readonly unknown[], kind: 'blog'|'research' = 'blog'): LibraryPost[] {
+ return items.map(item=>{const p=item as Record<string,unknown>;const str=(...keys:string[])=>{for(const k of keys)if(typeof p[k]==='string'&&p[k])return p[k] as string;return '';};const detail=kind==='blog'?(blogDetails as Record<string,{rich?:{image?:string};image?:string}>)[str('slug')]:undefined;const legacy=(thumbnails as Record<string,{image:string;imageAlt:string}>)[kind+'/'+str('slug')];const candidate=str('thumbnail','featuredImage','image','heroImage','hero')||detail?.rich?.image||'';const valid=(u:string)=>u.startsWith('/')&&!u.startsWith('//')&&existsSync(join(process.cwd(),'public',u));const image=valid(candidate)?candidate:legacy&&valid(legacy.image)?legacy.image:data[kind].image;const imageAlt=str('heroImageAlt','imageAlt','thumbnailAlt')||(legacy?.image===image?legacy.imageAlt:'')||(image===data[kind].image?data[kind].alt:str('title'));return {image,imageAlt,slug:str('slug'),title:str('title'),excerpt:str('excerpt','description','summary'),category:str('category','topic','cluster')||topicFor(str('title')+' '+str('excerpt','description','summary')),published:str('published','publishedAt','publishedDate','publicationDate','sourceDate'),minutes:Number(p.minutes||p.readingTime)||8,sources:Array.isArray(p.sources)?p.sources.length:Number(p.sourceCount)||0};}).sort((a,b)=>b.published.localeCompare(a.published));
+}
+
+function topicFor(text:string):string {const t=text.toLowerCase();for(const [label,pattern] of [['Quality & review',/quality|audit|qa |test|review|accessibility|verification/],['Systems & tools',/software|crm|api|wordpress|react|data|system|tool/],['Planning & coordination',/schedule|calendar|plan|intake|appointment|handoff|pipeline/],['Communication & follow-up',/communication|message|call|follow.up|borrower|customer|patient/],['Team & delivery',/team|staff|hire|role|delegat|onboard|design|develop/]] as [string,RegExp][])if(pattern.test(t))return label;return 'Operations & workflow';}

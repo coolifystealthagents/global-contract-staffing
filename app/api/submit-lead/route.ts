@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { sendLeadFallbackToMattermost } from '../../../lib/lead-fallback-mattermost';
 import { boundedText, hasAllowedOrigin, requestAddress, withinRateLimit } from '../../../lib/request-security';
 
 const personalDomains = new Set(['gmail.com','yahoo.com','hotmail.com','outlook.com','icloud.com','aol.com','proton.me','protonmail.com']);
@@ -47,52 +46,6 @@ export async function POST(request: Request) {
     return reply({ ok: false, message: 'Please use your business email address.' }, 400);
   }
 
-  const payload = {
-    first_name: firstName,
-    last_name: lastName,
-    name: legacyName,
-    email,
-    phone_country: phoneCountry,
-    phone,
-    company,
-    company_size: companySize,
-    positions_to_fill: positions,
-    referral_source: referral,
-    message,
-    source,
-    _page_url: pageUrl,
-  };
-  const endpoint = process.env.ACR_LEAD_ENDPOINT;
-  if (endpoint) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8_000);
-    try {
-      const forwarded = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-        cache: 'no-store',
-      });
-      if (!forwarded.ok) return reply({ ok: false, message: 'We could not send your request.' }, 502);
-    } catch {
-      return reply({ ok: false, message: 'We could not send your request.' }, 502);
-    } finally {
-      clearTimeout(timeout);
-    }
-  }
-
-  void sendLeadFallbackToMattermost({
-    name: [firstName, lastName].filter(Boolean).join(' ') || legacyName,
-    email,
-    phone: [phoneCountry, phone].filter(Boolean).join(' '),
-    business: company,
-    message,
-    companySize,
-    positions,
-    referral,
-    pageUrl,
-    userAgent: (request.headers.get('user-agent') || '').slice(0, 500),
-  });
+  // Keep validation and anti-abuse checks here; ACR delivers the accepted lead once.
   return reply({ ok: true });
 }
