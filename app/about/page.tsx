@@ -1,4 +1,5 @@
+import {DistinctAbout} from '../distinct-pages';
 import d from '../refresh-data.json';
 import {Team} from '../inner-pages';
 export const metadata={title:'About',alternates:{canonical:'/about'}};
-export default function About(){return <><main id="main-content"><div className={"fr-page fr-"+d.theme}><section className="fr-wrap fr-services-hero"><div><p className="fr-label">Global Contract Staffing</p><h1>{d.short}</h1><p className="fr-lead">{d.intro}</p><div className="fr-actions"><a className="fr-button" href="/contact-us">{d.cta} ↗</a></div></div><figure><img src={d.researchImage} alt={d.researchImageAlt} width="2200" height="1467"/></figure></section><section className="fr-wrap fr-fit"><div><p className="fr-label">How we think about support</p><h2>{d.storyTitle}</h2></div><div><p>{d.story}</p>{d.pillars.map(x=><article key={x[0]}><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section><Team/><section className="fr-wrap fr-working"><h2>A role built around your reality.</h2><div className="fr-accordions">{d.prepare.map((x,i)=><details open={i===0} key={x}><summary>{x}</summary><p>{d.pillars[i][1]}</p></details>)}</div><div className="fr-more"><a className="fr-button" href="/services">Explore the services ↗</a></div></section></div></main></>}
+export default function About(){return <><main id="main-content"><DistinctAbout/></main></>}
