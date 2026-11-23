@@ -11,6 +11,7 @@ import { november10BlogPosts } from './november10-blog';
 import { november11BlogPosts } from './november11-blog';
 import { november16BlogPosts } from './november16-blog';
 import { november17BlogPosts } from './november17-blog';
+import { november23BlogPosts } from './november23-blog';
 import { november22BlogPosts } from './november22-blog';
 import { november21BlogPosts } from './november21-blog';
 import { november20BlogPosts } from './november20-blog';
@@ -27,6 +28,7 @@ import { november10ResearchPosts } from './november10-research';
 import { november11ResearchPosts } from './november11-research';
 import { november16ResearchPosts } from './november16-research';
 import { november17ResearchPosts } from './november17-research';
+import { november23ResearchPosts } from './november23-research';
 import { november22ResearchPosts } from './november22-research';
 import { november21ResearchPosts } from './november21-research';
 import { november20ResearchPosts } from './november20-research';
@@ -55,8 +57,8 @@ function uniqueBySlug<T extends { slug: string }>(posts: T[]): T[] {
   });
 }
 
-export const blogPosts: BlogPost[] = uniqueBySlug([...november09BlogPosts, ...november10BlogPosts, ...november11BlogPosts, ...november16BlogPosts, ...november17BlogPosts, ...november22BlogPosts, ...november21BlogPosts, ...november20BlogPosts, ...november19BlogPosts, ...november18BlogPosts, ...november08BlogPosts, ...november07BlogPosts, ...november06BlogPosts, ...november05BlogPosts, ...november02BlogPosts, ...november01BlogPosts, ...october28BlogPosts, ...october27BlogPosts, ...october22BlogPosts, ...october12BlogPosts, ...legacyBlogPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
-export const researchPosts: ResearchPost[] = uniqueBySlug([...november09ResearchPosts, ...november10ResearchPosts, ...november11ResearchPosts, ...november16ResearchPosts, ...november17ResearchPosts, ...november22ResearchPosts, ...november21ResearchPosts, ...november20ResearchPosts, ...november19ResearchPosts, ...november18ResearchPosts, ...november08ResearchPosts, ...november07ResearchPosts, ...november06ResearchPosts, ...november05ResearchPosts, ...november02ResearchPosts, ...november01ResearchPosts, ...october28ResearchPosts, ...october27ResearchPosts, ...october22ResearchPosts, ...october12ResearchPosts, ...legacyResearchPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
+export const blogPosts: BlogPost[] = uniqueBySlug([...november09BlogPosts, ...november10BlogPosts, ...november11BlogPosts, ...november16BlogPosts, ...november17BlogPosts, ...november23BlogPosts, ...november22BlogPosts, ...november21BlogPosts, ...november20BlogPosts, ...november19BlogPosts, ...november18BlogPosts, ...november08BlogPosts, ...november07BlogPosts, ...november06BlogPosts, ...november05BlogPosts, ...november02BlogPosts, ...november01BlogPosts, ...october28BlogPosts, ...october27BlogPosts, ...october22BlogPosts, ...october12BlogPosts, ...legacyBlogPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
+export const researchPosts: ResearchPost[] = uniqueBySlug([...november09ResearchPosts, ...november10ResearchPosts, ...november11ResearchPosts, ...november16ResearchPosts, ...november17ResearchPosts, ...november23ResearchPosts, ...november22ResearchPosts, ...november21ResearchPosts, ...november20ResearchPosts, ...november19ResearchPosts, ...november18ResearchPosts, ...november08ResearchPosts, ...november07ResearchPosts, ...november06ResearchPosts, ...november05ResearchPosts, ...november02ResearchPosts, ...november01ResearchPosts, ...october28ResearchPosts, ...october27ResearchPosts, ...october22ResearchPosts, ...october12ResearchPosts, ...legacyResearchPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
 
 export const nav = [
   { href: '/services', label: 'Services' },
