@@ -1,66 +1,9 @@
 import { site } from './site';
 import type { BlogPost, ResearchPost } from './types';
-import { november06BlogPosts } from './november06-blog';
-import { november06ResearchPosts } from './november06-research';
-import { november05BlogPosts } from './november05-blog';
-import { november05ResearchPosts } from './november05-research';
-import { november03BlogPosts } from './november03-blog';
-import { november04BlogPosts } from './november04-blog';
-import { november09BlogPosts } from './november09-blog';
-import { november10BlogPosts } from './november10-blog';
-import { november11BlogPosts } from './november11-blog';
-import { november16BlogPosts } from './november16-blog';
-import { november17BlogPosts } from './november17-blog';
-import { november23BlogPosts } from './november23-blog';
-import { november24BlogPosts } from './november24-blog';
-import { november22BlogPosts } from './november22-blog';
-import { november21BlogPosts } from './november21-blog';
-import { november20BlogPosts } from './november20-blog';
-import { november19BlogPosts } from './november19-blog';
-import { november18BlogPosts } from './november18-blog';
-import { november08BlogPosts } from './november08-blog';
-import { november07BlogPosts } from './november07-blog';
-import { november02BlogPosts } from './november02-blog';
-import { november01BlogPosts } from './november01-blog';
-import { november03ResearchPosts } from './november03-research';
-import { november04ResearchPosts } from './november04-research';
-import { november09ResearchPosts } from './november09-research';
-import { november10ResearchPosts } from './november10-research';
-import { november11ResearchPosts } from './november11-research';
-import { november16ResearchPosts } from './november16-research';
-import { november17ResearchPosts } from './november17-research';
-import { november23ResearchPosts } from './november23-research';
-import { november24ResearchPosts } from './november24-research';
-import { november22ResearchPosts } from './november22-research';
-import { november21ResearchPosts } from './november21-research';
-import { november20ResearchPosts } from './november20-research';
-import { november19ResearchPosts } from './november19-research';
-import { november18ResearchPosts } from './november18-research';
-import { november08ResearchPosts } from './november08-research';
-import { november07ResearchPosts } from './november07-research';
-import { november02ResearchPosts } from './november02-research';
-import { november01ResearchPosts } from './november01-research';
-import { october12BlogPosts } from './october12Blog';
-import { october12ResearchPosts } from './october12Research';
-import { october22BlogPosts } from './october22-blog';
-import { october22ResearchPosts } from './october22-research';
-import { october27BlogPosts } from './october27-blog';
-import { october28BlogPosts } from './october28-blog';
-import { october27ResearchPosts } from './october27-research';
-import { october28ResearchPosts } from './october28-research';
-import { legacyBlogPosts, legacyResearchPosts } from './legacyEditorial';
 
-function uniqueBySlug<T extends { slug: string }>(posts: T[]): T[] {
-  const seen = new Set<string>();
-  return posts.filter((post) => {
-    if (seen.has(post.slug)) return false;
-    seen.add(post.slug);
-    return true;
-  });
-}
-
-export const blogPosts: BlogPost[] = uniqueBySlug([...november09BlogPosts, ...november10BlogPosts, ...november11BlogPosts, ...november16BlogPosts, ...november17BlogPosts, ...november23BlogPosts, ...november24BlogPosts, ...november22BlogPosts, ...november21BlogPosts, ...november20BlogPosts, ...november19BlogPosts, ...november18BlogPosts, ...november08BlogPosts, ...november07BlogPosts, ...november06BlogPosts, ...november05BlogPosts, ...november02BlogPosts, ...november01BlogPosts, ...october28BlogPosts, ...october27BlogPosts, ...october22BlogPosts, ...october12BlogPosts, ...legacyBlogPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
-export const researchPosts: ResearchPost[] = uniqueBySlug([...november09ResearchPosts, ...november10ResearchPosts, ...november11ResearchPosts, ...november16ResearchPosts, ...november17ResearchPosts, ...november23ResearchPosts, ...november24ResearchPosts, ...november22ResearchPosts, ...november21ResearchPosts, ...november20ResearchPosts, ...november19ResearchPosts, ...november18ResearchPosts, ...november08ResearchPosts, ...november07ResearchPosts, ...november06ResearchPosts, ...november05ResearchPosts, ...november02ResearchPosts, ...november01ResearchPosts, ...october28ResearchPosts, ...october27ResearchPosts, ...october22ResearchPosts, ...october12ResearchPosts, ...legacyResearchPosts]).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
+// Previous editorial content remains recoverable in Git history.
+export const blogPosts: BlogPost[] = [];
+export const researchPosts: ResearchPost[] = [];
 
 export const nav = [
   { href: '/services', label: 'Services' },
