@@ -6,6 +6,8 @@ import './globals.css';
 import './refresh.css';
 import './october12.css';
 
+import "./site-chrome-fixes.css";
+
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${site.domain}`),
   title: { default: `${site.name} | Specialist remote staff`, template: `%s | ${site.name}` },
