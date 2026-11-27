@@ -16,3 +16,7 @@
 html, body { overflow-x: clip; }
 
 [data-site-footer] > div > .site-parent-company { width:100%; }
+
+[data-site-footer] .site-footer-brand-link { display:inline-flex; align-items:center; gap:12px; max-width:100%; }
+[data-site-footer] .site-footer-brand-icon { width:36px; height:36px; flex:none; object-fit:contain; }
+[data-site-footer] .site-footer-wordmark { width:176px; height:auto; padding:8px; background:#fff; border-radius:6px; object-fit:contain; }
